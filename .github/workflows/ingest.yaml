@@ -23,8 +23,12 @@ jobs:
             - name: Run ingestion script
               run: |
                   python pull.py
+            - name: Show what was produced
+              run: |
+                    ls -l data/ || echo "data/ folder does not exist"
             - name: Upload data as artifact
               uses: actions/upload-artifact@v4
               with:
                   name: stock-data
                   path: data/
+                  
