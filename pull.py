@@ -1,10 +1,13 @@
+from datetime import date
+
 import yfinance as yf
 from pathlib import Path
 SYMBOLS = ["MSFT"]
 DATA_DIR = Path("data")
 DATA_DIR.mkdir(exist_ok=True)
 
-def fetch(symbol: str, start: str = "2020-01-01", end: str = "2026-01-01"):
+def fetch(symbol: str, start: str = "2020-01-01", end: str | None = None):
+    end = end or date.tpoday().isoformat()
     print(f"Fetching data for {symbol} from {start} to {end}")
     df = yf.download(symbol, start=start, end=end, auto_adjust=True)
     if(df.empty):
